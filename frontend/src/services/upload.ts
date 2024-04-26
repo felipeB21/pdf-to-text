@@ -5,10 +5,13 @@ export const uploadFile = async (file: File): Promise<[Error?, Data?]> => {
   formData.append("file", file);
 
   try {
-    const res = await fetch(`http://localhost:3000/api/files`, {
-      method: "POST",
-      body: formData,
-    });
+    const res = await fetch(
+      `https://pdf-to-text-frontend.vercel.app/api/files`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
 
     if (!res.ok) return [new Error(`Error uploading file: ${res.statusText}`)];
     const json = (await res.json()) as ApiUploadResponse;
